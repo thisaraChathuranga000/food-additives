@@ -1,7 +1,11 @@
-import { Text, View } from "react-native";
+import { Text, View, Button, TouchableOpacity } from "react-native";
 import { Image, StyleSheet } from "react-native";
-
+import { router } from 'expo-router';
 export default function Index() {
+  
+  const handleButtonPress = () => {
+    router.push("/home"); 
+  };
   return (
     <View
       style={{
@@ -11,28 +15,41 @@ export default function Index() {
       }}
     >
       <Image
-          source={require('@/assets/images/logo.png')}
-          style={styles.reactLogo}
+        source={require("@/assets/images/logo.png")}
+        style={styles.reactLogo}
       />
+
+      <TouchableOpacity style={styles.button} onPress={handleButtonPress}>
+        <Text style={styles.buttonText}>Continue</Text>
+      </TouchableOpacity>
+
+      <Image source={require("@/assets/images/dotted.png")} />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-  },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
   reactLogo: {
-    height: 178,
+    height: 278,
     width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+    marginBottom: 40,
+  },
+  button: {
+    backgroundColor: "#FD7F20",
+    paddingVertical: 10,
+    paddingHorizontal: 40,
+    borderRadius: 5,
+    width: 200,
+    marginBottom: 20,
+  },
+  buttonText: {
+    color: "white",
+    fontSize: 16,
+    textAlign: "center",
   },
 });
