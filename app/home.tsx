@@ -1,33 +1,130 @@
-import { Text, View, StyleSheet, TextInput } from "react-native";
+import { Text, View, StyleSheet, TextInput, FlatList } from "react-native";
 import AntDesign from "@expo/vector-icons/AntDesign";
-import Ionicons from '@expo/vector-icons/Ionicons';
-import { SearchBar } from 'react-native-elements';
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 export default function Home() {
   return (
     <View style={{ flex: 1 }}>
       {/* Header Bar */}
       <View style={styles.header}>
-        <AntDesign name="menu-fold" size={24} color="white"/>
+        <AntDesign name="menu-fold" size={32} color="white" style={{marginTop:20}}/>
 
-        <View style={{ flexDirection: "row", width: "100%" }}>
+        <View
+          style={{
+            flexDirection: "row",
+            width: "100%",
+            marginTop: 30,
+            alignContent: "flex-start",
+            justifyContent: "center",
+          }}
+        >
           <TextInput
             style={styles.searchBar}
             placeholder="Search..."
-            placeholderTextColor="white"
+            placeholderTextColor="#86869E"
           />
 
-{/* <SearchBar
-            placeholder="Type Here..." onBlur={() => {}} onChangeText={() => {}} onFocus={() => {}} value={""} platform={"default"} clearIcon={() => {}} searchIcon={() => {}}   showLoading={false} onClear={() => {}} onCancel={() => {}} lightTheme={false} round={false} cancelButtonTitle={""}   showCancel={false}         
-      /> */}
-        
-          {/* <Ionicons name="filter-sharp" size={24} color="white" style={styles.icon}/> */}
+          <Ionicons
+            name="filter-sharp"
+            size={34}
+            color="white"
+            style={styles.icon}
+          />
         </View>
       </View>
 
-      {/* Main Content */}
-      <View style={styles.content}>
-        <Text>Home 3</Text>
+      <View style={styles.container}>
+        <FlatList
+          data={[
+            {
+              key: "Curcumins",
+              type: "Colour",
+              effect: "Natural",
+              number: "100",
+            },
+            {
+              key: "Curcumins",
+              type: "Colour",
+              effect: "Natural",
+              number: "100",
+            },
+            {
+              key: "Curcumins",
+              type: "Colour",
+              effect: "Natural",
+              number: "100",
+            },
+            {
+              key: "new",
+              type: "Color",
+              effect: "Natural",
+              number: "100",
+            },
+            {
+              key: "Curcumins",
+              type: "Colour",
+              effect: "Natural",
+              number: "100",
+            },
+            {
+              key: "Curcumins",
+              type: "Colour",
+              effect: "Natural",
+              number: "100",
+            },
+            {
+              key: "Curcumins",
+              type: "Colour",
+              effect: "Natural",
+              number: "100",
+            },
+            {
+              key: "new",
+              type: "Color",
+              effect: "Natural",
+              number: "100",
+            },
+            {
+              key: "Curcumins",
+              type: "Colour",
+              effect: "Natural",
+              number: "100",
+            },
+            {
+              key: "Curcumins",
+              type: "Colour",
+              effect: "Natural",
+              number: "100",
+            },
+            {
+              key: "Curcumins",
+              type: "Colour",
+              effect: "Natural",
+              number: "100",
+            },
+            {
+              key: "new",
+              type: "Color",
+              effect: "Natural",
+              number: "100",
+            },
+          ]}
+          renderItem={({ item }) => (
+            <View style={{flexDirection: "row", width:"100%"}}>
+              <View>
+                <Text style={styles.number}>{item.number}</Text>
+              </View>
+              <View style={styles.itemContainer}>
+                <Text style={styles.ItemTitle}>{item.key}</Text>
+                <Text style={styles.item}>{item.type}</Text>
+                <Text style={styles.item}>{item.effect}</Text>
+              </View>
+              <View>
+              <AntDesign name="right" size={24} color="#FFA451" />
+              </View>
+            </View>
+          )}
+        />
       </View>
     </View>
   );
@@ -39,7 +136,7 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "25%",
     position: "absolute",
-    padding:"4%"
+    padding: "4%",
   },
   headerText: {
     fontSize: 20,
@@ -50,21 +147,56 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 60,
+    marginTop: "-70%", // Push content below the header
+    paddingHorizontal: 16,
   },
   searchBar: {
     flex: 8,
-    height: 40,
-    backgroundColor: "rgba(255, 255, 255, 0.7)", // Slightly transparent white
+    height: 60,
+    backgroundColor: "#F3F4F9", // Slightly transparent white
     borderRadius: 20,
     paddingLeft: 15,
-    color: "white",
+    color: "#2B2B2D",
     fontSize: 16,
   },
   icon: {
     flex: 2,
     color: "white",
-    fontSize: 16,
+    fontSize: 32,
     textAlign: "center",
+  },
+  container: {
+    flex: 1,
+    paddingTop: 240,
+    marginLeft:40
+  },
+  itemContainer:{
+    marginLeft:20,
+    marginBottom:20,
+    width:220
+  },
+  item: {
+    fontSize: 11,
+  },
+  ItemTitle:{
+    fontSize:14
+  },
+  number:{
+    backgroundColor:"#FFA451",
+    color:"white",
+    borderRadius:6,
+    paddingTop:15,
+    paddingBottom:15,
+    paddingLeft:20,
+    paddingRight:20
+    
+  },
+  line: {
+    flex:10,
+    height: 2,
+    backgroundColor: "black",
+    width:"100%",
+    
+    
   },
 });
