@@ -1,10 +1,9 @@
 import { Text, View, Button, TouchableOpacity } from "react-native";
 import { Image, StyleSheet } from "react-native";
-import { router } from 'expo-router';
+import { router } from "expo-router";
 export default function Index() {
-  
   const handleButtonPress = () => {
-    router.push("/home"); 
+    router.push("/home");
   };
   return (
     <View
