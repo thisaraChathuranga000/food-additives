@@ -1,27 +1,20 @@
-import { Text, View, Button, TouchableOpacity } from "react-native";
-import { Image, StyleSheet } from "react-native";
+import { Text, View, TouchableOpacity, Image, StyleSheet } from "react-native";
 import { router } from "expo-router";
+
 export default function Index() {
   const handleButtonPress = () => {
     router.push("/home");
   };
+
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
+    <View style={styles.container}>
       <Image
         source={require("@/assets/images/logo.png")}
         style={styles.reactLogo}
       />
-
       <TouchableOpacity style={styles.button} onPress={handleButtonPress}>
         <Text style={styles.buttonText}>Continue</Text>
       </TouchableOpacity>
-
       <Image source={require("@/assets/images/dotted.png")} />
     </View>
   );

@@ -94,6 +94,8 @@ const Drawer: React.FC<DrawerProps> = ({
               />
             </View>
 
+            <ScrollView>
+
             <InfoContainer title={"About Us"}>
               <Text style={styles.infoText}>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
@@ -109,6 +111,7 @@ const Drawer: React.FC<DrawerProps> = ({
             <InfoContainer title={"Contact Us"}>
               <ContactBox />
             </InfoContainer>
+            </ScrollView>
           </View>
              
 

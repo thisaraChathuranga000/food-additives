@@ -15,7 +15,7 @@ export default function ListContainer() {
     const fetchData = async () => {
       try {
         const result: InsData[] = await getAll();
-        setInsData(result); 
+        setInsData(result);
       } catch (error: any) {
         setError(error);
       } finally {

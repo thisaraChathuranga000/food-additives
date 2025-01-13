@@ -1,110 +1,137 @@
 import React, { useState } from "react";
-import {
-  View,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  TextInput,
-  ScrollView,
-} from "react-native";
-import Header from "@/components/common/Header/Header";
+import { View, StyleSheet, Text, ScrollView } from "react-native";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { router } from "expo-router";
+import FormSectionHead from "@/components/admin/FormSectionHead";
+import FormSection from "@/components/admin/formSection";
+import InputField from "@/components/admin/InputField";
 
 export default function Admin() {
-  const [showAddFields, setShowAddFields] = useState<boolean>(true);
-  const [showUpdateFields, setShowUpdateFields] = useState<boolean>(true);
+  const [showAddFields, setShowAddFields] = useState(false);
+  const [addArrowIconDirection, setAddArrowIconDirection] = useState<"right" | "down">("right");
+  const [showUpdateFields, setShowUpdateFields] = useState(false);
+  const [updateArrowIconDirection, setUpdateArrowIconDirection] = useState<"right" | "down">("right");
+  const [showDelete, setShowDelete] = useState(false);
+  const [deleteArrowIconDirection, setDeleteArrowIconDirection] = useState<"right" | "down">("right");
+
+  const handleAddNew = () => {
+    setShowAddFields(true);
+    setAddArrowIconDirection("down");
+  };
+
+  const closeAddNew = () => {
+    setShowAddFields(false);
+    setAddArrowIconDirection("right");
+  };
+
+  const handleUpdate = () => {
+    setShowUpdateFields(true);
+    setUpdateArrowIconDirection("down");
+  };
+
+  const closeUpdate = () => {
+    setShowUpdateFields(false);
+    setUpdateArrowIconDirection("right");
+  };
+
+  const handleDelete = () => {
+    setShowDelete(true);
+    setDeleteArrowIconDirection("down");
+  };
+
+  const closeDelete = () => {
+    setShowDelete(false);
+    setDeleteArrowIconDirection("right");
+  };
 
   return (
-    <View>
-      <Header>
-        <View style={styles.headerContainer}>
-          <Text style={styles.headerText}>Admin</Text>
-          <View style={styles.logoutContainer}>
-            <Text style={styles.logoutText} onPress={() => {router.push("/home")}}>Logout</Text>
-            <AntDesign name="right" size={24} color="#0C6BE7" />
-          </View>
+    <ScrollView>
+      <View style={styles.headerContainer}>
+        <Text style={styles.headerText}>Admin</Text>
+        <View style={styles.logoutContainer}>
+          <Text style={styles.logoutText} onPress={() => router.push("/home")}>
+            Logout
+          </Text>
+          <AntDesign name="right" size={24} color="#0C6BE7" />
         </View>
-      </Header>
+      </View>
 
       <View>
-        <TouchableOpacity style={styles.button} onPress={() => {}}>
-          <Text style={styles.buttonText}>Add new Record</Text>
-        </TouchableOpacity>
+        {/* Add section */}
+        <FormSectionHead
+          onpress={handleAddNew}
+          iconDirection={addArrowIconDirection}
+          title="Add new Record"
+        />
 
-        {/* {showAddFields && (
-          <View style={styles.formContainer}>
-            <Text style={styles.inputLabel}>Admin User Name</Text>
-            <View style={styles.inputContainer}>
-              <TextInput
-                placeholder="user"
-                placeholderTextColor="#86869E"
-                style={styles.textInput}
-              />
-            </View>
+        {showAddFields && (
+          <FormSection
+            actionButtonColor="#FFA451"
+            actionTitle="Add"
+            handleClose={closeAddNew}
+          >
+            <InputField title="Ins Number" placeholder="" />
+            <InputField title="Name" placeholder="" />
+            <InputField title="Function" placeholder="" />
+            <InputField title="Naturel or synthetic" placeholder="" />
+            <InputField title="Health Effects/Approval Status (EU/US)" placeholder="" />
+            <InputField title="Food Types" placeholder="" />
+            <InputField title="Additional Notes" placeholder="" />
+            <InputField title="Description" placeholder="" />
+            <InputField title="Standard  level" placeholder="" />
+            <InputField title="More Info" placeholder="" />
+          </FormSection>
+        )}
 
-            <Text style={styles.inputLabel}>Password</Text>
-            <View style={styles.inputContainer}>
-              <TextInput
-                placeholder="12345"
-                placeholderTextColor="#86869E"
-                secureTextEntry={true}
-                style={styles.textInput}
-              />
-            </View>
+        {/* Update section */}
+        <FormSectionHead
+          onpress={handleUpdate}
+          iconDirection={updateArrowIconDirection}
+          title="Update Record"
+        />
 
-            <TouchableOpacity style={styles.loginButton} onPress={() => {}}>
-              <Text style={styles.loginButtonText}>Add</Text>
-            </TouchableOpacity>
-          </View>
-        )} */}
+        {showUpdateFields && (
+          <FormSection
+            actionButtonColor="#FFA451"
+            actionTitle="Update"
+            handleClose={closeUpdate}
+          >
+            <InputField title="Ins Number" placeholder="" />
+            <InputField title="Name" placeholder="" />
+            <InputField title="Function" placeholder="" />
+            <InputField title="Naturel or synthetic" placeholder="" />
+            <InputField title="Health Effects/Approval Status (EU/US)" placeholder="" />
+            <InputField title="Food Types" placeholder="" />
+            <InputField title="Additional Notes" placeholder="" />
+            <InputField title="Description" placeholder="" />
+            <InputField title="Standard  level" placeholder="" />
+            <InputField title="More Info" placeholder="" />
+          </FormSection>
+        )}
 
-        <TouchableOpacity style={styles.button} onPress={() => {}}>
-          <Text style={styles.buttonText}>Update Record</Text>
-        </TouchableOpacity>
+        {/* Delete section */}
+        <FormSectionHead
+          onpress={handleDelete}
+          iconDirection={deleteArrowIconDirection}
+          title="Delete Record"
+        />
 
-        {/* {showUpdateFields && (
-          <View style={styles.formContainer}>
-            <Text style={styles.inputLabel}>Admin User Name</Text>
-            <View style={styles.inputContainer}>
-              <TextInput
-                placeholder="user"
-                placeholderTextColor="#86869E"
-                style={styles.textInput}
-              />
-            </View>
-
-            <Text style={styles.inputLabel}>Password</Text>
-            <View style={styles.inputContainer}>
-              <TextInput
-                placeholder="12345"
-                placeholderTextColor="#86869E"
-                secureTextEntry={true}
-                style={styles.textInput}
-              />
-            </View>
-
-            <TouchableOpacity style={styles.loginButton} onPress={() => {}}>
-              <Text style={styles.loginButtonText}>Add</Text>
-            </TouchableOpacity>
-          </View>
-        )} */}
-
-        <TouchableOpacity style={styles.deleteButton} onPress={() => {}}>
-          <Text style={styles.buttonText}>Delete Record</Text>
-        </TouchableOpacity>
+        {showDelete && (
+          <FormSection
+            actionButtonColor="#FF5151"
+            actionTitle="Delete"
+            handleClose={closeDelete}
+          >
+            <InputField title="E number" placeholder="Type E number here" />
+          </FormSection>
+        )}
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flexGrow: 1,
-    backgroundColor: "#f5f5f5",
-  },
   headerContainer: {
-    display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
@@ -113,8 +140,7 @@ const styles = StyleSheet.create({
   headerText: {
     fontSize: 18,
     fontWeight: "bold",
-    color: "white",
-    marginLeft: "10%",
+    color: "black",
   },
   logoutContainer: {
     flexDirection: "row",
@@ -124,69 +150,5 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "#0C6BE7",
     marginRight: 8,
-  },
-  button: {
-    backgroundColor: "#3284F0",
-    paddingVertical: 15,
-    paddingHorizontal: 20,
-    borderRadius: 10,
-    width: "90%",
-    alignItems: "center",
-    alignSelf: "center",
-    marginTop: 20,
-  },
-  deleteButton: {
-    backgroundColor: "#FF3A3A",
-    paddingVertical: 15,
-    paddingHorizontal: 20,
-    borderRadius: 10,
-    width: "90%",
-    alignItems: "center",
-    alignSelf: "center",
-    marginTop: 20,
-  },
-  buttonText: {
-    color: "white",
-    fontWeight: "bold",
-    fontSize: 16,
-  },
-  formContainer: {
-    padding: 20,
-    alignItems: "center",
-    width: "100%",
-  },
-  inputLabel: {
-    fontSize: 16,
-    fontWeight: "bold",
-    marginBottom: 10,
-    alignSelf: "flex-start",
-    color: "#464647",
-  },
-  inputContainer: {
-    width: "100%",
-    backgroundColor: "#f9f9f9",
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: "#ddd",
-    paddingHorizontal: 15,
-    paddingVertical: 10,
-    marginBottom: 20,
-  },
-  textInput: {
-    fontSize: 16,
-    color: "#333",
-  },
-  loginButton: {
-    backgroundColor: "#FFA451",
-    paddingVertical: 15,
-    paddingHorizontal: 20,
-    borderRadius: 10,
-    width: "100%",
-    alignItems: "center",
-  },
-  loginButtonText: {
-    color: "white",
-    fontWeight: "bold",
-    fontSize: 16,
   },
 });

@@ -68,17 +68,17 @@ export async function insertData(data: InsData): Promise<string | null> {
   }
 }
 
-export async function updateData(
-  key: string,
-  updatedData: Partial<InsData>
-): Promise<boolean> {
-  try {
-    const recordRef = child(dbRef, `data/${key}`);
-    await update(recordRef, updatedData);
-    console.log("Data updated successfully for key:", key);
-    return true;
-  } catch (error) {
-    console.error("Error updating data for key:", key, error);
-    return false;
-  }
-}
+// export async function updateData(
+//   key: string,
+//   updatedData: Partial<InsData>
+// ): Promise<boolean> {
+//   try {
+//     const recordRef = child(dbRef, `data/${key}`);
+//     await update(recordRef, updatedData);
+//     console.log("Data updated successfully for key:", key);
+//     return true;
+//   } catch (error) {
+//     console.error("Error updating data for key:", key, error);
+//     return false;
+//   }
+// }
