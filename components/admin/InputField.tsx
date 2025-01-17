@@ -4,9 +4,12 @@ import { View, StyleSheet, Text, TextInput } from "react-native";
 interface InputFieldProps {
   title: string;
   placeholder: string;
+  value?: string;
+  onChangeText?: (value: string) => void;
+
 }
 
-export default function InputField({ title, placeholder }: InputFieldProps) {
+export default function InputField({ title, placeholder, value, onChangeText }: InputFieldProps) {
   return (
     <>
       <Text style={styles.inputLabel}>{title}</Text>
@@ -15,6 +18,8 @@ export default function InputField({ title, placeholder }: InputFieldProps) {
           placeholder={placeholder}
           placeholderTextColor="#86869E"
           style={styles.textInput}
+          value={value}
+          onChangeText={onChangeText}
         />
       </View>
     </>

@@ -9,4 +9,5 @@ export interface InsData {
     description: string; 
     standard_level: string; 
     more_Info: string;
+ 
 }

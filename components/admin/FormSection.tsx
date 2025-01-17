@@ -5,6 +5,7 @@ interface FormSectionProps {
   children: React.ReactNode;
   actionTitle: String;
   handleClose: () => void;
+  handleAction?: () => void;
   actionButtonColor: "#FF5151" | "#FFA451";
 }
 
@@ -13,13 +14,14 @@ export default function FormSection({
   actionTitle,
   handleClose,
   actionButtonColor,
+  handleAction
 }: FormSectionProps) {
   return (
     <View style={styles.formContainer}>
       {children}
       <TouchableOpacity
         style={[styles.actionButton, { backgroundColor: actionButtonColor }]}
-        onPress={() => {}}
+        onPress={handleAction}
       >
         <Text style={styles.actionButtonText}>{actionTitle}</Text>
       </TouchableOpacity>
