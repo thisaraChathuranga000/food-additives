@@ -13,7 +13,7 @@ import FormSectionHead from "@/components/admin/FormSectionHead";
 import FormSection from "@/components/admin/FormSection";
 import InputField from "@/components/admin/InputField";
 import { InsData } from "@/interfaces/InsData";
-import { insertData, getByInsNumber, updateData, updateDataByInsNumber } from "@/firebase/firebaseUtils";
+import { insertData, getByInsNumber, updateData, deleteByInsNumber } from "@/firebase/firebaseUtils";
 
 export default function Admin() {
   const [showAddFields, setShowAddFields] = useState(false);
@@ -47,9 +47,10 @@ export default function Admin() {
     standard_level: "",
     more_Info: "",
   });
-  const [formDataSendToUpdate, setFormDataSendToUpdate] = useState<Partial<InsData>| null>(null);
+  //const [formDataSendToUpdate, setFormDataSendToUpdate] = useState<Partial<InsData>| null>(null);
   const [insNumber, setInsNumber] = useState<string>("")
   const [key, setKey] = useState<string>("")
+  const [insNumberForDelete, setInsNumberForDelete] = useState<string>("")
 
   const handleAddNew = () => {
     setShowAddFields(true);
@@ -127,6 +128,15 @@ export default function Admin() {
       closeUpdate();
     }else{
       Alert.alert("Error", "Failed to update record. Please try again.");
+    }
+  }
+
+  const handleDeleteRecord = async () => {
+    const isDelete = await deleteByInsNumber(insNumberForDelete);
+    if(isDelete){
+      Alert.alert(`Successfully deleted record of ${insNumberForDelete}`);
+    } else{
+      Alert.alert(`Error -  Failed to deleted record of ${insNumberForDelete}`);
     }
   }
 
@@ -379,8 +389,15 @@ export default function Admin() {
             actionButtonColor="#FF5151"
             actionTitle="Delete"
             handleClose={closeDelete}
+            handleAction={handleDeleteRecord}
           >
-            <InputField title="E number" placeholder="Type E number here" />
+            <InputField 
+              title="E number" 
+              placeholder="Type E number here" 
+              onChangeText={(value: string) =>
+                setInsNumberForDelete(value)
+              } 
+            />
           </FormSection>
         )}
       </View>

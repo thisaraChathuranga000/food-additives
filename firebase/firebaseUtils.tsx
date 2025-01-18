@@ -30,32 +30,6 @@ export async function getAll(): Promise<InsData[]> {
   }
 }
 
-// export async function getByInsNumber(
-//   insNumber: string
-// ): Promise<InsData | null> {
-//   try {
-//     const snapshot = await get(
-//       query(
-//         child(dbRef, "data"),
-//         orderByChild("ins_number"),
-//         equalTo(insNumber)
-//       )
-//     );
-
-//     if (snapshot.exists()) {
-//       const data: InsData = snapshot.val();
-//       const dataArray = Object.values(data);
-//       return dataArray[0] || null;
-//     } else {
-//       console.log("No data found for ins_number:", insNumber);
-//       return null;
-//     }
-//   } catch (error) {
-//     console.error("Error fetching data by ins_number:", error);
-//     return null;
-//   }
-// }
-
 export async function getByInsNumber(
   insNumber: string
 ): Promise<(InsData & { key: string }) | null> {
@@ -160,6 +134,37 @@ export async function updateDataByInsNumber(
     return true;
   } catch (error) {
     console.error(`Error updating data for ins_number: ${ins_number}`, error);
+    return false;
+  }
+}
+
+export async function deleteByInsNumber(insNumber: string): Promise<boolean> {
+  try {
+    const snapshot = await get(child(dbRef, "data"));
+    if (!snapshot.exists()) {
+      console.error("No data found in the database.");
+      return false;
+    }
+
+    let keyToDelete: string | null = null;
+    snapshot.forEach((childSnapshot) => {
+      const childData = childSnapshot.val();
+      if (childData?.ins_number === insNumber) {
+        keyToDelete = childSnapshot.key;
+      }
+    });
+
+    if (!keyToDelete) {
+      console.error(`No record found with ins_number: ${insNumber}`);
+      return false;
+    }
+
+    const recordRef = child(dbRef, `data/${keyToDelete}`);
+    await set(recordRef, null);
+    console.log(`Data deleted successfully for ins_number: ${insNumber}`);
+    return true;
+  } catch (error) {
+    console.error(`Error deleting data for ins_number: ${insNumber}`, error);
     return false;
   }
 }

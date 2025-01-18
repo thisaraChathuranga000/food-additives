@@ -17,6 +17,7 @@ const { width } = Dimensions.get("window");
 export default function Home() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [drawerAnimation] = useState(new Animated.Value(-width));
+  const [searchQuery, setSearchQuery] = useState<string>("");
 
   const toggleDrawer = () => {
     Animated.timing(drawerAnimation, {
@@ -53,6 +54,8 @@ export default function Home() {
             style={styles.searchBar}
             placeholder="Search"
             placeholderTextColor="#86869E"
+            value={searchQuery} // Bind value to state
+            onChangeText={setSearchQuery}
           />
         </View>
       </Header>
@@ -64,7 +67,7 @@ export default function Home() {
         closeDrawer={closeDrawer}
         direction="left"
       />
-      <ListContainer />
+      <ListContainer searchQuery={searchQuery} />
     </View>
   );
 }
