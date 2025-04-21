@@ -17,8 +17,8 @@ import { router } from "expo-router";
 
 const { width, height } = Dimensions.get("window");
 
-const adminUserName = "admin"
-const adminPassword = "1234"
+const adminUserName = "admin";
+const adminPassword = "1234";
 
 interface DrawerProps {
   animationValue: Animated.Value;
@@ -39,15 +39,12 @@ const Drawer: React.FC<DrawerProps> = ({
   const [password, setPassword] = useState<String>("");
 
   const handleLogin = () => {
-
-    if(userName === adminUserName && password === adminPassword){
-      router.push("/admin")
-    }
-    else{
+    if (userName === adminUserName && password === adminPassword) {
+      router.push("/admin");
+    } else {
       alert("incorrect password");
     }
-    
-  }
+  };
 
   const openBottomDrawer = () => {
     Animated.timing(bottomAnimationValue, {
@@ -85,35 +82,43 @@ const Drawer: React.FC<DrawerProps> = ({
             <AntDesign name="closecircleo" size={24} color="#C2C2C2" />
           </TouchableOpacity>
         </View>
-         
-          <View style={styles.drawerContent}>
-            <View style={styles.logoContainer}>
-              <Image
-                source={require("@/assets/images/logo.png")}
-                style={styles.logo}
-              />
-            </View>
 
-            <ScrollView>
+        <View style={styles.drawerContent}>
+          <View style={styles.logoContainer}>
+            <Image
+              source={require("@/assets/images/logo.png")}
+              style={styles.logo}
+            />
+          </View>
 
-            <InfoContainer title={"About Us"}>
+          <ScrollView>
+            <InfoContainer title={"About Application"}>
               <Text style={styles.infoText}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                This mobile application is developed as part of an undergraduate
+                project to help users easily access and search for Food INS
+                (International Numbering System) codes used for food additives.
               </Text>
 
               <Text style={styles.infoText}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                The INS numbers are internationally recognized identifiers for
+                food additives approved for use. Our app provides a simplified
+                and user-friendly way to learn about these additives, their
+                categories, and their uses in the food industry.
+              </Text>
+
+              <Text style={styles.infoText}>
+                This project aims to support better awareness and transparency
+                about what goes into the food we consume. Whether you're a
+                student, professional, or just health-conscious, this tool makes
+                food information more accessible.
               </Text>
             </InfoContainer>
 
             <InfoContainer title={"Contact Us"}>
               <ContactBox />
             </InfoContainer>
-            </ScrollView>
-          </View>
-             
+          </ScrollView>
+        </View>
 
         <View style={styles.adminSection}>
           <TouchableOpacity onPress={openBottomDrawer}>
@@ -179,7 +184,7 @@ const Drawer: React.FC<DrawerProps> = ({
 const styles = StyleSheet.create({
   scrollViewContent: {
     flexGrow: 1,
-    padding: 10,  
+    padding: 10,
   },
   drawerContainer: {
     position: "absolute",
@@ -204,7 +209,6 @@ const styles = StyleSheet.create({
   drawerContent: {
     flex: 1,
     padding: 20,
-   
   },
   logoContainer: {
     alignItems: "center",

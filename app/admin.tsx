@@ -28,24 +28,20 @@ export default function Admin() {
     name: "",
     function: "",
     naturel_Synthetic: "",
-    health_Effects_Approval_Status_EU_US: "",
+    health_Effects_Approval_Status_EU_US: "", 
     food_Types: "",
     additional_Notes: "",
-    description: "",
-    standard_level: "",
-    more_Info: "",
+    banned_countries:""
   });
   const [formDataToUpdate, setFormDataToUpdate] = useState<Partial<InsData>>({
     ins_number: "",
     name: "",
     function: "",
     naturel_Synthetic: "",
-    health_Effects_Approval_Status_EU_US: "",
+    health_Effects_Approval_Status_EU_US: "", 
     food_Types: "",
     additional_Notes: "",
-    description: "",
-    standard_level: "",
-    more_Info: "",
+    banned_countries:""
   });
   //const [formDataSendToUpdate, setFormDataSendToUpdate] = useState<Partial<InsData>| null>(null);
   const [insNumber, setInsNumber] = useState<string>("")
@@ -220,6 +216,15 @@ export default function Admin() {
             />
 
             <InputField
+              title="Description"
+              placeholder=""
+              value={formData.banned_countries}
+              onChangeText={(value: string) =>
+                handleInputChange("banned_countries", value)
+              }
+            />
+
+            <InputField
               title="Additional Notes"
               placeholder=""
               value={formData.additional_Notes}
@@ -228,32 +233,32 @@ export default function Admin() {
               }
             />
 
-            <InputField
+            {/* <InputField
               title="Description"
               placeholder=""
               value={formData.description}
               onChangeText={(value: string) =>
                 handleInputChange("description", value)
               }
-            />
+            /> */}
 
-            <InputField
+            {/* <InputField
               title="Standard  level"
               placeholder=""
               value={formData.standard_level}
               onChangeText={(value: string) =>
                 handleInputChange("standard_level", value)
               }
-            />
+            /> */}
 
-            <InputField
+            {/* <InputField
               title="More Info"
               placeholder=""
               value={formData.more_Info}
               onChangeText={(value: string) =>
                 handleInputChange("more_Info", value)
               }
-            />
+            /> */}
           </FormSection>
         )}
 
@@ -334,6 +339,17 @@ export default function Admin() {
             />
 
             <InputField
+              title="banned_countries"
+              placeholder={
+                showExistingField?.banned_countries || ""
+              }
+              value={formDataToUpdate.banned_countries}
+              onChangeText={(value: string) =>
+                handleInputChangeForUpdate("banned_countries", value)
+              }
+            />
+
+            <InputField
               title="Additional Notes"
               placeholder={
                showExistingField?.additional_Notes || ""
@@ -344,7 +360,7 @@ export default function Admin() {
               }
             />
 
-            <InputField
+            {/* <InputField
               title="Description"
               placeholder={
                 showExistingField?.description || ""
@@ -353,9 +369,9 @@ export default function Admin() {
               onChangeText={(value: string) =>
                 handleInputChangeForUpdate("description", value)
               }
-            />
+            /> */}
 
-            <InputField
+            {/* <InputField
               title="Standard  level"
               placeholder={
               showExistingField?.standard_level || ""
@@ -364,16 +380,16 @@ export default function Admin() {
               onChangeText={(value: string) =>
                 handleInputChangeForUpdate("standard_level", value)
               }
-            />
+            /> */}
 
-            <InputField
+            {/* <InputField
               title="More Info"
               placeholder={showExistingField?.more_Info || ""}
               value={formDataToUpdate.more_Info}
               onChangeText={(value: string) =>
                 handleInputChangeForUpdate("more_Info", value)
               }
-            />
+            /> */}
           </FormSection>
         )}
 

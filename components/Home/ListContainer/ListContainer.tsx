@@ -1,4 +1,10 @@
-import { Text, View, StyleSheet, FlatList } from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  FlatList,
+  TouchableOpacity,
+} from "react-native";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { useRouter } from "expo-router";
 import { getAll } from "@/firebase/firebaseUtils";
@@ -6,7 +12,7 @@ import { useEffect, useState } from "react";
 import { InsData } from "@/interfaces/InsData";
 
 interface ListContainerProps {
-  searchQuery?: string; 
+  searchQuery?: string;
 }
 
 export default function ListContainer({ searchQuery }: ListContainerProps) {
@@ -29,9 +35,18 @@ export default function ListContainer({ searchQuery }: ListContainerProps) {
     fetchData();
   }, []);
 
-  const filteredData = insData.filter(
-    (item) => item.name && item.name.toLowerCase().includes((searchQuery || "").toLowerCase())
-  );
+  // const filteredData = insData.filter(
+  //   (item) =>
+  //     item.name &&
+  //     item.name.toLowerCase().includes((searchQuery || "").toLowerCase())
+  // );
+
+  const filteredData = insData.filter((item) => {
+    const query = (searchQuery || "").toLowerCase();
+    const nameMatch = item.name?.toLowerCase().includes(query);
+    const numberMatch = item.ins_number?.toLowerCase().includes(query);
+    return nameMatch || numberMatch;
+  });
 
   const navigateToDetails = (insNumber: String) => {
     router.push(`/details/${insNumber}` as const);
@@ -51,27 +66,23 @@ export default function ListContainer({ searchQuery }: ListContainerProps) {
         renderItem={({ item }) => {
           if (!item) return null;
           return (
-            <View style={styles.itemRow}>
-              <View style={styles.numberContainer}>
-                <Text style={styles.number}>{item.ins_number || "N/A"}</Text>
+            <TouchableOpacity
+              onPress={() => navigateToDetails(item.ins_number || "N/A")}
+              style={styles.itemRow}
+            >
+              <View style={styles.itemRow}>
+                <View style={styles.numberContainer}>
+                  <Text style={styles.number}>{item.ins_number || "N/A"}</Text>
+                </View>
+                <View style={styles.itemContainer}>
+                  <Text style={styles.itemTitle}>{item.name || "Unknown"}</Text>
+                  <Text style={styles.item}>{item.function || "Unknown"}</Text>
+                  <Text style={styles.item}>
+                    {item.naturel_Synthetic || "Unknown"}
+                  </Text>
+                </View>
               </View>
-              <View style={styles.itemContainer}>
-                <Text style={styles.itemTitle}>{item.name || "Unknown"}</Text>
-                <Text style={styles.item}>{item.function || "Unknown"}</Text>
-                <Text style={styles.item}>
-                  {item.naturel_Synthetic || "Unknown"}
-                </Text>
-              </View>
-              <View>
-                <AntDesign
-                  name="right"
-                  size={24}
-                  color="#FFA451"
-                  onPress={() => navigateToDetails(item.ins_number || "N/A")}
-                  style={styles.icon}
-                />
-              </View>
-            </View>
+            </TouchableOpacity>
           );
         }}
       />

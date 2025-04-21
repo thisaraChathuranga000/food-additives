@@ -98,23 +98,13 @@ export default function Page() {
             </View>
 
             <View style={styles.detail}>
+              <Text style={styles.detailsTitle}>Banned Countries</Text>
+              <Text style={styles.detailText}>{insData?.banned_countries}</Text>
+            </View>
+
+            <View style={styles.detail}>
               <Text style={styles.detailsTitle}>Additional Notes</Text>
               <Text style={styles.detailText}>{insData?.additional_Notes}</Text>
-            </View>
-
-            <View style={styles.detail}>
-              <Text style={styles.detailsTitle}>Description</Text>
-              <Text style={styles.detailText}>{insData?.description}</Text>
-            </View>
-
-            <View style={styles.detail}>
-              <Text style={styles.detailsTitle}>Standard Level</Text>
-              <Text style={styles.detailText}>{insData?.standard_level}</Text>
-            </View>
-
-            <View style={styles.detail}>
-              <Text style={styles.detailsTitle}>More Info</Text>
-              <Text style={styles.detailText}>{insData?.more_Info}</Text>
             </View>
           </View>
 
