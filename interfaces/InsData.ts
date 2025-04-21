@@ -6,8 +6,7 @@ export interface InsData {
     health_Effects_Approval_Status_EU_US: string;  
     food_Types: string; 
     additional_Notes: string;  
-    description: string; 
-    standard_level: string; 
-    more_Info: string;
+    banned_countries:string;
+
  
 }

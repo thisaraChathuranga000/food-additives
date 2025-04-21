@@ -21,7 +21,7 @@ export default function Home() {
 
   const toggleDrawer = () => {
     Animated.timing(drawerAnimation, {
-      toValue: isDrawerOpen ? -width : 0,
+      toValue: isDrawerOpen ? -width : 0,    
       duration: 300,
       useNativeDriver: true,
     }).start();
